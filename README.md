@@ -239,3 +239,7 @@ Future `bp-ui` components should reuse the same library pattern:
 - `bp-ui-*` prefixed markup
 - ready-made HTML snippets first
 - optional framework adapters where they add real value
+
+## License
+
+MIT

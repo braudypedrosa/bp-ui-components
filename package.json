@@ -2,6 +2,7 @@
   "name": "@braudypedrosa/bp-ui-components",
   "version": "0.1.0",
   "description": "Framework-agnostic bp-ui component library with vanilla JS and Alpine adapters.",
+  "author": "Braudy Pedrosa",
   "type": "module",
   "main": "./dist/bp-ui.js",
   "module": "./dist/bp-ui.js",
@@ -11,7 +12,8 @@
   },
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "dev": "vite",
@@ -21,11 +23,24 @@
   "keywords": [
     "ui",
     "components",
+    "counter",
+    "design-system",
     "vanilla-js",
     "alpinejs",
     "tailwind"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/braudypedrosa/bp-ui-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/braudypedrosa/bp-ui-components/issues"
+  },
+  "homepage": "https://github.com/braudypedrosa/bp-ui-components#readme",
+  "engines": {
+    "node": ">=20"
+  },
   "publishConfig": {
     "access": "public"
   },
