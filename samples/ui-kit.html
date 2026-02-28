@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Complete UI Kit - Sidebar Nav Style</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1717cf",
+                        "primary-hover": "#1010b0",
+                        "primary-light": "#e0e0fa",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111121",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a1a2e",
+                        "text-main": "#0e0e1b",
+                        "text-secondary": "#4e4e97",
+                        "border-light": "#e7e7f3",
+                        "border-dark": "#2a2a40",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "mono": ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "monospace"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Custom scrollbar for better aesthetic */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-background-light text-text-main h-screen overflow-hidden flex flex-col antialiased">
+<!-- Top Navbar -->
+<header class="h-16 flex items-center justify-between px-6 bg-surface-light border-b border-border-light z-30 shrink-0">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 flex items-center justify-center bg-primary rounded-lg text-white">
+<span class="material-symbols-outlined">design_services</span>
+</div>
+<h2 class="text-text-main text-lg font-bold tracking-tight">Nexus UI Kit</h2>
+</div>
+<div class="hidden md:flex items-center max-w-md w-full ml-4">
+<div class="relative w-64">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-text-secondary">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</span>
+<input class="w-full bg-background-light text-sm text-text-main rounded-lg pl-10 pr-4 py-2 border-none focus:ring-2 focus:ring-primary placeholder-text-secondary" placeholder="Search components..." type="text"/>
+<div class="absolute inset-y-0 right-0 flex items-center pr-2">
+<kbd class="hidden lg:inline-block border border-gray-200 rounded px-1 text-[10px] font-medium text-gray-400">⌘K</kbd>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-sm font-medium text-primary" href="#">Components</a>
+<a class="text-sm font-medium text-text-secondary hover:text-primary transition-colors" href="#">Foundation</a>
+<a class="text-sm font-medium text-text-secondary hover:text-primary transition-colors" href="#">Templates</a>
+</nav>
+<div class="h-6 w-px bg-border-light mx-2"></div>
+<div class="flex items-center gap-3">
+<button class="p-2 text-text-secondary hover:text-primary hover:bg-primary-light/20 rounded-full transition-colors">
+<span class="material-symbols-outlined text-[20px]">dark_mode</span>
+</button>
+<button class="bg-primary hover:bg-primary-hover text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors shadow-sm shadow-primary/30">
+                    Download v2.0
+                </button>
+<div class="w-9 h-9 rounded-full bg-cover bg-center border border-border-light cursor-pointer" data-alt="User avatar placeholder" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC3h2VwTeN3KshF1HHNK6ddvDKcdnAEyU64yjNMMfL0w_ZGH4WhztIMxzcdq2fjQQkSnvkx6YErCqpXGiYTLleDC0WwfvSniYquAytYlUqDXbTyGQlHJc2EU8XgJrUebnJFyA6eMzFgjPGmrpHfZuUG9OHxNKQHo_ohbyMsiX-qMEGW6qsBwFJuiGpZ2Gi2Fp3UKqNLUDGy--ZG8knPB9VdIcNPaMsTvLhFdlvOE75qjXr8mwvFzHRwPdcwxrekAMAf49Yo6crJgg');"></div>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 bg-surface-light border-r border-border-light flex-col hidden md:flex overflow-y-auto pb-10">
+<div class="px-4 py-6">
+<div class="mb-6">
+<h3 class="px-3 text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2">Getting Started</h3>
+<nav class="space-y-0.5">
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-text-secondary rounded-lg hover:bg-background-light hover:text-text-main transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">rocket_launch</span>
+                            Introduction
+                        </a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-text-secondary rounded-lg hover:bg-background-light hover:text-text-main transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                            Installation
+                        </a>
+</nav>
+</div>
+<div class="mb-6">
+<h3 class="px-3 text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2">Foundation</h3>
+<nav class="space-y-0.5">
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-primary bg-primary-light/30 rounded-lg" href="#typography">
+<span class="material-symbols-outlined text-[18px]">text_fields</span>
+                            Typography
+                        </a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-text-secondary rounded-lg hover:bg-background-light hover:text-text-main transition-colors" href="#colors">
+<span class="material-symbols-outlined text-[18px]">palette</span>
+                            Colors
+                        </a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-text-secondary rounded-lg hover:bg-background-light hover:text-text-main transition-colors" href="#spacing">
+<span class="material-symbols-outlined text-[18px]">grid_4x4</span>
+                            Spacing
+                        </a>
+</nav>
+</div>
+<div class="mb-6">
+<h3 class="px-3 text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2">Components</h3>
+<nav class="space-y-0.5">
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-text-secondary rounded-lg hover:bg-background-light hover:text-text-main transition-colors" href="#buttons">
+<span class="material-symbols-outlined text-[18px]">smart_button</span>
+                            Buttons
+                        </a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-text-secondary rounded-lg hover:bg-background-light hover:text-text-main transition-colors" href="#forms">
+<span class="material-symbols-outlined text-[18px]">check_box</span>
+                            Forms
+                        </a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-text-secondary rounded-lg hover:bg-background-light hover:text-text-main transition-colors" href="#navigation">
+<span class="material-symbols-outlined text-[18px]">menu</span>
+                            Navigation
+                        </a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-text-secondary rounded-lg hover:bg-background-light hover:text-text-main transition-colors" href="#data-display">
+<span class="material-symbols-outlined text-[18px]">table_chart</span>
+                            Data Display
+                        </a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-text-secondary rounded-lg hover:bg-background-light hover:text-text-main transition-colors" href="#feedback">
+<span class="material-symbols-outlined text-[18px]">notifications</span>
+                            Feedback
+                        </a>
+</nav>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto scroll-smooth bg-background-light px-8 py-10 md:px-12 lg:px-16 pb-32">
+<div class="max-w-5xl mx-auto space-y-16">
+<!-- Page Header -->
+<div class="pb-6 border-b border-border-light">
+<div class="flex items-center gap-2 mb-2 text-sm font-medium text-text-secondary">
+<span>Design System</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-primary">Components</span>
+</div>
+<h1 class="text-4xl font-bold text-text-main tracking-tight mb-4">UI Component Library</h1>
+<p class="text-lg text-text-secondary max-w-3xl">A comprehensive collection of reusable UI elements designed to ensure consistency and efficiency across all platform interfaces.</p>
+</div>
+<!-- 1. Typography -->
+<section class="scroll-mt-24" id="typography">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">text_fields</span>
+<h2 class="text-2xl font-bold text-text-main">Typography</h2>
+</div>
+<div class="bg-surface-light rounded-xl border border-border-light p-8 shadow-sm">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+<div class="space-y-6">
+<div>
+<span class="text-xs font-mono text-text-secondary mb-1 block">Display / H1</span>
+<h1 class="text-5xl font-bold text-text-main tracking-tight">Rapid Design</h1>
+</div>
+<div>
+<span class="text-xs font-mono text-text-secondary mb-1 block">Heading / H2</span>
+<h2 class="text-4xl font-bold text-text-main tracking-tight">Visual Hierarchy</h2>
+</div>
+<div>
+<span class="text-xs font-mono text-text-secondary mb-1 block">Heading / H3</span>
+<h3 class="text-3xl font-semibold text-text-main">Modern Interfaces</h3>
+</div>
+<div>
+<span class="text-xs font-mono text-text-secondary mb-1 block">Heading / H4</span>
+<h4 class="text-2xl font-semibold text-text-main">Component Driven</h4>
+</div>
+</div>
+<div class="space-y-6">
+<div>
+<span class="text-xs font-mono text-text-secondary mb-1 block">Body / Large</span>
+<p class="text-lg text-text-main leading-relaxed">Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.</p>
+</div>
+<div>
+<span class="text-xs font-mono text-text-secondary mb-1 block">Body / Default</span>
+<p class="text-base text-text-main leading-relaxed">Dramatically maintain clicks-and-mortar solutions without functional solutions. Completely synergize resource taxing relationships via premier niche markets.</p>
+</div>
+<div>
+<span class="text-xs font-mono text-text-secondary mb-1 block">Body / Small</span>
+<p class="text-sm text-text-secondary leading-relaxed">Professionally cultivate one-to-one customer service with robust ideas. Dynamically innovate resource-leveling customer service for state of the art customer service.</p>
+</div>
+<div>
+<span class="text-xs font-mono text-text-secondary mb-1 block">Monospace</span>
+<p class="font-mono text-sm bg-background-light p-2 rounded text-text-main">npm install @nexus/ui-kit</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. Buttons -->
+<section class="scroll-mt-24" id="buttons">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">smart_button</span>
+<h2 class="text-2xl font-bold text-text-main">Buttons</h2>
+</div>
+<div class="bg-surface-light rounded-xl border border-border-light p-8 shadow-sm space-y-8">
+<div>
+<h3 class="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4">Variants</h3>
+<div class="flex flex-wrap items-center gap-4">
+<button class="bg-primary hover:bg-primary-hover text-white font-medium py-2.5 px-5 rounded-lg transition-colors shadow-sm shadow-primary/20">Primary Action</button>
+<button class="bg-surface-light border border-border-dark/20 hover:bg-background-light text-text-main font-medium py-2.5 px-5 rounded-lg transition-colors">Secondary</button>
+<button class="bg-transparent hover:bg-background-light text-primary font-medium py-2.5 px-5 rounded-lg transition-colors">Ghost Button</button>
+<button class="bg-red-50 text-red-600 hover:bg-red-100 font-medium py-2.5 px-5 rounded-lg transition-colors">Destructive</button>
+</div>
+</div>
+<div class="h-px bg-border-light w-full"></div>
+<div>
+<h3 class="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4">States &amp; Sizes</h3>
+<div class="flex flex-wrap items-center gap-4">
+<button class="bg-primary text-white font-medium py-3 px-6 rounded-lg text-lg">Large</button>
+<button class="bg-primary text-white font-medium py-2 px-4 rounded-lg text-sm">Small</button>
+<button class="bg-primary/50 text-white font-medium py-2.5 px-5 rounded-lg cursor-not-allowed" disabled="">Disabled</button>
+<button class="bg-primary text-white font-medium py-2.5 px-5 rounded-lg flex items-center gap-2">
+<span class="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></span>
+                                    Loading
+                                </button>
+<button class="bg-surface-light border border-border-dark/20 text-text-main p-2.5 rounded-lg hover:bg-background-light">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+<button class="bg-primary text-white font-medium py-2.5 px-4 pl-3 rounded-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">cloud_upload</span>
+                                    With Icon
+                                </button>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. Form Elements -->
+<section class="scroll-mt-24" id="forms">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">check_box</span>
+<h2 class="text-2xl font-bold text-text-main">Form Elements</h2>
+</div>
+<div class="bg-surface-light rounded-xl border border-border-light p-8 shadow-sm">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+<!-- Inputs -->
+<div class="space-y-6">
+<div class="space-y-1.5">
+<label class="block text-sm font-medium text-text-main">Email Address</label>
+<input class="block w-full rounded-lg border-border-dark/20 bg-background-light text-text-main shadow-sm focus:border-primary focus:ring-primary sm:text-sm py-2.5 px-3" placeholder="name@company.com" type="email"/>
+<p class="text-xs text-text-secondary">We'll never share your email with anyone else.</p>
+</div>
+<div class="space-y-1.5">
+<label class="block text-sm font-medium text-text-main">Password</label>
+<div class="relative rounded-md shadow-sm">
+<input class="block w-full rounded-lg border-border-dark/20 bg-background-light text-text-main shadow-sm focus:border-primary focus:ring-primary sm:text-sm py-2.5 px-3 pr-10" placeholder="••••••••" type="password"/>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+<span class="material-symbols-outlined text-text-secondary text-[20px]">visibility</span>
+</div>
+</div>
+</div>
+<div class="space-y-1.5">
+<label class="block text-sm font-medium text-text-main">Select Option</label>
+<select class="block w-full rounded-lg border-border-dark/20 bg-background-light text-text-main shadow-sm focus:border-primary focus:ring-primary sm:text-sm py-2.5 px-3">
+<option>United States</option>
+<option>Canada</option>
+<option>Mexico</option>
+</select>
+</div>
+<div class="space-y-1.5">
+<label class="block text-sm font-medium text-text-main">Message</label>
+<textarea class="block w-full rounded-lg border-border-dark/20 bg-background-light text-text-main shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-3" placeholder="Leave a comment..." rows="3"></textarea>
+</div>
+</div>
+<!-- Toggles & Checks -->
+<div class="space-y-6">
+<div>
+<span class="block text-sm font-medium text-text-main mb-3">Checkboxes</span>
+<div class="space-y-3">
+<div class="flex items-center">
+<input class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary" id="chk1" type="checkbox"/>
+<label class="ml-2 block text-sm text-text-main" for="chk1">Remember me</label>
+</div>
+<div class="flex items-center">
+<input checked="" class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary" id="chk2" type="checkbox"/>
+<label class="ml-2 block text-sm text-text-main" for="chk2">Subscribe to newsletter</label>
+</div>
+<div class="flex items-center">
+<input class="h-4 w-4 rounded border-gray-300 text-gray-400" disabled="" id="chk3" type="checkbox"/>
+<label class="ml-2 block text-sm text-text-secondary" for="chk3">Disabled option</label>
+</div>
+</div>
+</div>
+<div>
+<span class="block text-sm font-medium text-text-main mb-3">Radio Buttons</span>
+<div class="space-y-3">
+<div class="flex items-center">
+<input class="h-4 w-4 border-gray-300 text-primary focus:ring-primary" id="rad1" name="plan" type="radio"/>
+<label class="ml-2 block text-sm text-text-main" for="rad1">Standard Plan</label>
+</div>
+<div class="flex items-center">
+<input checked="" class="h-4 w-4 border-gray-300 text-primary focus:ring-primary" id="rad2" name="plan" type="radio"/>
+<label class="ml-2 block text-sm text-text-main" for="rad2">Pro Plan</label>
+</div>
+</div>
+</div>
+<div>
+<span class="block text-sm font-medium text-text-main mb-3">Toggles</span>
+<div class="flex items-center justify-between py-2">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-text-main">Airplane Mode</span>
+<span class="text-xs text-text-secondary">Disable all network connections</span>
+</div>
+<button aria-checked="false" class="bg-gray-200 relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" role="switch" type="button">
+<span aria-hidden="true" class="translate-x-0 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+</button>
+</div>
+<div class="flex items-center justify-between py-2">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-text-main">Notifications</span>
+</div>
+<button aria-checked="true" class="bg-primary relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" role="switch" type="button">
+<span aria-hidden="true" class="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. Data Display -->
+<section class="scroll-mt-24" id="data-display">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">table_chart</span>
+<h2 class="text-2xl font-bold text-text-main">Data Display</h2>
+</div>
+<div class="bg-surface-light rounded-xl border border-border-light shadow-sm overflow-hidden mb-8">
+<div class="px-6 py-4 border-b border-border-light flex justify-between items-center bg-background-light/50">
+<h3 class="text-base font-semibold text-text-main">Recent Transactions</h3>
+<button class="text-primary text-sm font-medium hover:underline">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="min-w-full text-left text-sm whitespace-nowrap">
+<thead class="uppercase tracking-wider border-b border-border-light bg-gray-50/50">
+<tr>
+<th class="px-6 py-4 text-text-secondary font-semibold" scope="col">User</th>
+<th class="px-6 py-4 text-text-secondary font-semibold" scope="col">Status</th>
+<th class="px-6 py-4 text-text-secondary font-semibold" scope="col">Date</th>
+<th class="px-6 py-4 text-text-secondary font-semibold text-right" scope="col">Amount</th>
+<th class="px-6 py-4 text-text-secondary font-semibold" scope="col"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-b border-border-light hover:bg-background-light transition-colors">
+<td class="px-6 py-4 font-medium text-text-main flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-cover bg-center" data-alt="Female user avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBkr2aATROq83ScVzpS3X2IxTM8IRKiSlr9qyGjMY59WfXpW4TB0S0fdmPiCTSTz_-UCBM9jzVuVThvwc26GE37nZJM22H6GlCFJ1ad1j7uwD82kI5z7xOTSl7HY0kjQqcY7fXUpUscMK3JTr9Qd8hVri4l466_B8sE5z7TbvmfkDpHjfNpNrGNpzUI-yxGRuRFn_G-yNHetDtOJnJSlLckRRx8eFJEQCOmKzLFznzyk9gfNtSlBeaxerQVK7IDxUsPLk12kEe5FA');"></div>
+                                            Sophia Anderson
+                                        </td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-semibold text-green-600">
+<span class="h-1.5 w-1.5 rounded-full bg-green-600"></span>
+                                                Paid
+                                            </span>
+</td>
+<td class="px-6 py-4 text-text-secondary">Oct 24, 2023</td>
+<td class="px-6 py-4 text-text-main font-mono text-right">$450.00</td>
+<td class="px-6 py-4 text-right">
+<button class="text-text-secondary hover:text-primary"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<tr class="border-b border-border-light hover:bg-background-light transition-colors">
+<td class="px-6 py-4 font-medium text-text-main flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-cover bg-center" data-alt="Male user avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCSUCJMHPHd_XwkB8SZS3BDn6kPaW9SmsCnurVLTY6TW7C5LhIqTF86fWs7M1KNOASw0G8uxdL6958prLgDLxKLHzBL1YBDSKDe9gMtzzRltNLmok5zae-OA71fko0PMwv-TZ28i4P7fhsT4zokAWE_SP0y3HytMH3fQzVrH1zFdvBUSaoVA6RADZzZ4YSN-1VUxEAICqlYk0ys1NWhxbwaTNfQ4BqYrADEXDKhk1khTEvXh5bTkQuE3m8cGHuuQQQ15RNITd2hhw');"></div>
+                                            Liam Foster
+                                        </td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1 rounded-full bg-yellow-50 px-2 py-1 text-xs font-semibold text-yellow-600">
+<span class="h-1.5 w-1.5 rounded-full bg-yellow-600"></span>
+                                                Pending
+                                            </span>
+</td>
+<td class="px-6 py-4 text-text-secondary">Oct 23, 2023</td>
+<td class="px-6 py-4 text-text-main font-mono text-right">$120.50</td>
+<td class="px-6 py-4 text-right">
+<button class="text-text-secondary hover:text-primary"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<tr class="hover:bg-background-light transition-colors">
+<td class="px-6 py-4 font-medium text-text-main flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-xs">
+                                                JD
+                                            </div>
+                                            John Doe
+                                        </td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1 rounded-full bg-red-50 px-2 py-1 text-xs font-semibold text-red-600">
+<span class="h-1.5 w-1.5 rounded-full bg-red-600"></span>
+                                                Failed
+                                            </span>
+</td>
+<td class="px-6 py-4 text-text-secondary">Oct 21, 2023</td>
+<td class="px-6 py-4 text-text-main font-mono text-right">$89.00</td>
+<td class="px-6 py-4 text-right">
+<button class="text-text-secondary hover:text-primary"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-3 border-t border-border-light bg-gray-50/50 flex items-center justify-between">
+<span class="text-xs text-text-secondary">Showing 1 to 3 of 12 entries</span>
+<div class="flex gap-2">
+<button class="px-2 py-1 text-xs border border-border-light rounded bg-white hover:bg-gray-50 disabled:opacity-50" disabled="">Previous</button>
+<button class="px-2 py-1 text-xs border border-border-light rounded bg-white hover:bg-gray-50">Next</button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-surface-light p-6 rounded-xl border border-border-light shadow-sm hover:shadow-md transition-shadow">
+<div class="h-10 w-10 rounded-lg bg-blue-100 text-primary flex items-center justify-center mb-4">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<h3 class="text-lg font-bold text-text-main mb-2">Analytics Dashboard</h3>
+<p class="text-sm text-text-secondary mb-4">Monitor your metrics in real-time with our advanced charting tools.</p>
+<div class="flex items-center gap-2">
+<span class="px-2 py-1 bg-gray-100 text-xs rounded text-text-secondary">v2.0</span>
+<span class="px-2 py-1 bg-gray-100 text-xs rounded text-text-secondary">Pro</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-light p-6 rounded-xl border border-border-light shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-text-secondary">more_horiz</span>
+</div>
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-full bg-cover bg-center" data-alt="Team member portrait" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA2OdUln-f52mnx4ryMvtVoP2kDzy90UzhMnQXtz5LN8s6j2btJHfKZfXetgL56dJNpkCeO73dR0nJqR-LqGamqL7NsME0MKi3BqMZ9hxDnu2KH-CoFUob6ikEUmuvgB-R7G_-mt5ySipkjwW48Yb5diM4LmAZr455FQjFOK7abYaHuGKAeu9eJMlZObN3qAYPMP90doVgp82eoKaS2Vlr1nP4BCWXnTOdn9bm9G8sUOO_DZODRjKNQG3Ty8Uwg0f-JGEePvzlc1Q');"></div>
+<div>
+<h3 class="text-base font-bold text-text-main">Sarah Jenkins</h3>
+<p class="text-xs text-text-secondary">Product Designer</p>
+</div>
+</div>
+<div class="flex gap-2 mt-4">
+<button class="flex-1 py-2 text-sm border border-border-light rounded-lg hover:bg-background-light">Profile</button>
+<button class="flex-1 py-2 text-sm bg-primary text-white rounded-lg hover:bg-primary-hover">Message</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-light rounded-xl border border-border-light shadow-sm overflow-hidden flex flex-col">
+<div class="h-32 bg-cover bg-center" data-alt="Abstract blue gradient header" style="background-image: linear-gradient(to right, #1717cf, #6d6dff);"></div>
+<div class="p-6 pt-0 -mt-8">
+<div class="h-16 w-16 bg-white rounded-xl shadow-md flex items-center justify-center text-3xl mb-4">🚀</div>
+<h3 class="text-lg font-bold text-text-main">Launch Pad</h3>
+<p class="text-sm text-text-secondary mt-2">Deploy your projects with a single click.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. Feedback -->
+<section class="scroll-mt-24" id="feedback">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">notifications</span>
+<h2 class="text-2xl font-bold text-text-main">Feedback</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<div class="space-y-4">
+<!-- Alerts -->
+<div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
+<div class="flex">
+<div class="flex-shrink-0">
+<span class="material-symbols-outlined text-blue-500">info</span>
+</div>
+<div class="ml-3">
+<p class="text-sm text-blue-700">
+<span class="font-bold">Info:</span> A new software update is available.
+                                        </p>
+</div>
+</div>
+</div>
+<div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg">
+<div class="flex">
+<div class="flex-shrink-0">
+<span class="material-symbols-outlined text-green-500">check_circle</span>
+</div>
+<div class="ml-3">
+<p class="text-sm text-green-700">
+<span class="font-bold">Success:</span> Your changes have been saved successfully.
+                                        </p>
+</div>
+</div>
+</div>
+<div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-r-lg">
+<div class="flex">
+<div class="flex-shrink-0">
+<span class="material-symbols-outlined text-yellow-600">warning</span>
+</div>
+<div class="ml-3">
+<p class="text-sm text-yellow-700">
+<span class="font-bold">Warning:</span> Your subscription expires in 3 days.
+                                        </p>
+</div>
+</div>
+</div>
+<div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg">
+<div class="flex">
+<div class="flex-shrink-0">
+<span class="material-symbols-outlined text-red-500">error</span>
+</div>
+<div class="ml-3">
+<p class="text-sm text-red-700">
+<span class="font-bold">Error:</span> Unable to connect to server.
+                                        </p>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<!-- Progress -->
+<div class="bg-surface-light p-6 rounded-xl border border-border-light shadow-sm">
+<h3 class="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4">Progress</h3>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between mb-1">
+<span class="text-sm font-medium text-text-main">Storage</span>
+<span class="text-sm font-medium text-text-secondary">45%</span>
+</div>
+<div class="w-full bg-gray-200 rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 45%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-1">
+<span class="text-sm font-medium text-text-main">Uploading</span>
+<span class="text-sm font-medium text-text-secondary">80%</span>
+</div>
+<div class="w-full bg-gray-200 rounded-full h-2">
+<div class="bg-green-500 h-2 rounded-full animate-pulse" style="width: 80%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Toast Static -->
+<div class="bg-surface-light p-4 rounded-xl border border-border-light shadow-lg flex items-start gap-3 w-full max-w-sm">
+<div class="bg-green-100 text-green-600 rounded-full p-1 shrink-0">
+<span class="material-symbols-outlined text-xl">check</span>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-bold text-text-main">Download Complete</h4>
+<p class="text-xs text-text-secondary mt-1">Your file 'report_2024.pdf' is ready.</p>
+</div>
+<button class="text-gray-400 hover:text-text-main">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. Navigation Elements -->
+<section class="scroll-mt-24" id="navigation">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">menu</span>
+<h2 class="text-2xl font-bold text-text-main">Navigation Components</h2>
+</div>
+<div class="bg-surface-light rounded-xl border border-border-light p-8 shadow-sm space-y-8">
+<!-- Breadcrumbs -->
+<div>
+<h3 class="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4">Breadcrumbs</h3>
+<nav aria-label="Breadcrumb" class="flex">
+<ol class="inline-flex items-center space-x-1 md:space-x-3">
+<li class="inline-flex items-center">
+<a class="inline-flex items-center text-sm font-medium text-text-secondary hover:text-primary" href="#">
+<span class="material-symbols-outlined text-lg mr-1">home</span>
+                                            Home
+                                        </a>
+</li>
+<li>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-gray-400 text-lg">chevron_right</span>
+<a class="ml-1 text-sm font-medium text-text-secondary hover:text-primary md:ml-2" href="#">Projects</a>
+</div>
+</li>
+<li aria-current="page">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-gray-400 text-lg">chevron_right</span>
+<span class="ml-1 text-sm font-medium text-text-main md:ml-2">Nexus UI</span>
+</div>
+</li>
+</ol>
+</nav>
+</div>
+<!-- Tabs -->
+<div>
+<h3 class="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4">Tabs</h3>
+<div class="border-b border-border-light">
+<ul class="flex flex-wrap -mb-px text-sm font-medium text-center">
+<li class="mr-2">
+<a aria-current="page" class="inline-flex items-center justify-center p-4 text-primary border-b-2 border-primary rounded-t-lg active group" href="#">
+<span class="material-symbols-outlined text-lg mr-2">person</span>
+                                            Profile
+                                        </a>
+</li>
+<li class="mr-2">
+<a class="inline-flex items-center justify-center p-4 text-text-secondary border-b-2 border-transparent rounded-t-lg hover:text-text-main hover:border-gray-300 group transition-colors" href="#">
+<span class="material-symbols-outlined text-lg mr-2">settings</span>
+                                            Settings
+                                        </a>
+</li>
+<li class="mr-2">
+<a class="inline-flex items-center justify-center p-4 text-text-secondary border-b-2 border-transparent rounded-t-lg hover:text-text-main hover:border-gray-300 group transition-colors" href="#">
+<span class="material-symbols-outlined text-lg mr-2">dashboard</span>
+                                            Dashboard
+                                        </a>
+</li>
+</ul>
+</div>
+</div>
+<!-- Pagination -->
+<div>
+<h3 class="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4">Pagination</h3>
+<nav aria-label="Page navigation">
+<ul class="inline-flex -space-x-px text-sm">
+<li>
+<a class="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-text-secondary bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-text-main" href="#">Previous</a>
+</li>
+<li>
+<a class="flex items-center justify-center px-3 h-8 leading-tight text-text-secondary bg-white border border-gray-300 hover:bg-gray-100 hover:text-text-main" href="#">1</a>
+</li>
+<li>
+<a class="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700" href="#">2</a>
+</li>
+<li>
+<a class="flex items-center justify-center px-3 h-8 leading-tight text-text-secondary bg-white border border-gray-300 hover:bg-gray-100 hover:text-text-main" href="#">3</a>
+</li>
+<li>
+<a class="flex items-center justify-center px-3 h-8 leading-tight text-text-secondary bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-text-main" href="#">Next</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</section>
+<footer class="pt-10 border-t border-border-light text-center text-text-secondary text-sm">
+<p>© 2023 Nexus UI Kit Library. All rights reserved.</p>
+</footer>
+</div>
+</main>
+</div>
+</body></html>
