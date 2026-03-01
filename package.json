@@ -1,6 +1,6 @@
 {
   "name": "@braudypedrosa/bp-ui-components",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Framework-agnostic bp-ui component library with vanilla JS and Alpine adapters.",
   "author": "Braudy Pedrosa",
   "type": "module",
