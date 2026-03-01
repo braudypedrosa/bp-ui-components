@@ -65,4 +65,23 @@ describe('bpUICounter', () => {
     expect(counter.value).toBe(6);
     expect(counter.inputValue).toBe('6');
   });
+
+  it('keeps canIncrement and canDecrement in sync with boundary states', () => {
+    const counter = bpUICounter({
+      value: 1,
+      min: 1,
+      max: 3,
+    });
+
+    counter.init();
+    expect(counter.canDecrement()).toBe(false);
+    expect(counter.canIncrement()).toBe(true);
+
+    counter.increment();
+    counter.increment();
+
+    expect(counter.value).toBe(3);
+    expect(counter.canIncrement()).toBe(false);
+    expect(counter.canDecrement()).toBe(true);
+  });
 });

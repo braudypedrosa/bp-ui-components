@@ -1,0 +1,234 @@
+.bp-ui-radio {
+  --bp-ui-radio-bg: #ffffff;
+  --bp-ui-radio-border: #d9e1eb;
+  --bp-ui-radio-text: #142033;
+  --bp-ui-radio-muted: #64748b;
+  --bp-ui-radio-accent: #0f172a;
+  --bp-ui-radio-accent-contrast: #ffffff;
+  --bp-ui-radio-tag-bg: #dbeafe;
+  --bp-ui-radio-tag-text: #1d4ed8;
+  --bp-ui-radio-radius: 1.1rem;
+  --bp-ui-radio-shadow: 0 18px 42px -34px rgba(15, 23, 42, 0.42);
+  display: grid;
+  gap: 0.7rem;
+  width: min(100%, 36rem);
+  color: var(--bp-ui-radio-text);
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+}
+
+.bp-ui-radio__label,
+.bp-ui-radio__hint,
+.bp-ui-radio__status {
+  line-height: 1.4;
+}
+
+.bp-ui-radio__label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bp-ui-radio-muted);
+}
+
+.bp-ui-radio__hint,
+.bp-ui-radio__status {
+  font-size: 0.85rem;
+  color: var(--bp-ui-radio-muted);
+}
+
+.bp-ui-radio__group {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.bp-ui-radio__option {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  padding: 1rem;
+  border: 1px solid var(--bp-ui-radio-border);
+  border-radius: var(--bp-ui-radio-radius);
+  background: var(--bp-ui-radio-bg);
+  box-shadow: var(--bp-ui-radio-shadow);
+  cursor: pointer;
+  transition: border-color 0.18s ease, background-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  box-sizing: border-box;
+}
+
+.bp-ui-radio__option:hover {
+  transform: translateY(-1px);
+}
+
+.bp-ui-radio__option.is-selected {
+  border-color: color-mix(in srgb, var(--bp-ui-radio-accent) 30%, white);
+  background: color-mix(in srgb, var(--bp-ui-radio-accent) 6%, white);
+}
+
+.bp-ui-radio__option.is-disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.bp-ui-radio__input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.bp-ui-radio__control {
+  position: relative;
+  display: inline-flex;
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: 0 0 auto;
+  margin-top: 0.1rem;
+  border: 2px solid color-mix(in srgb, var(--bp-ui-radio-border) 80%, black 10%);
+  border-radius: 999px;
+  background: #ffffff;
+}
+
+.bp-ui-radio__control::after {
+  content: "";
+  position: absolute;
+  inset: 0.18rem;
+  border-radius: 999px;
+  background: var(--bp-ui-radio-accent);
+  transform: scale(0);
+  transition: transform 0.16s ease;
+}
+
+.bp-ui-radio__option.is-selected .bp-ui-radio__control {
+  border-color: var(--bp-ui-radio-accent);
+}
+
+.bp-ui-radio__option.is-selected .bp-ui-radio__control::after {
+  transform: scale(1);
+}
+
+.bp-ui-radio__content {
+  min-width: 0;
+  flex: 1 1 auto;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.bp-ui-radio__header {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.bp-ui-radio__option-label {
+  font-size: 0.97rem;
+  font-weight: 700;
+}
+
+.bp-ui-radio__sublabel {
+  color: var(--bp-ui-radio-muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.bp-ui-radio__tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.45rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--bp-ui-radio-tag-bg);
+  color: var(--bp-ui-radio-tag-text);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.bp-ui-radio--pill {
+  width: min(100%, 40rem);
+}
+
+.bp-ui-radio--pill .bp-ui-radio__group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 0.55rem;
+}
+
+.bp-ui-radio--pill .bp-ui-radio__option {
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  box-shadow: none;
+}
+
+.bp-ui-radio--pill .bp-ui-radio__control,
+.bp-ui-radio--pill .bp-ui-radio__sublabel,
+.bp-ui-radio--pill .bp-ui-radio__tag {
+  display: none;
+}
+
+.bp-ui-radio--pill .bp-ui-radio__content {
+  display: flex;
+  align-items: center;
+}
+
+.bp-ui-radio--pill .bp-ui-radio__header {
+  display: block;
+}
+
+.bp-ui-radio--pill .bp-ui-radio__option-label {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #3f3f46;
+}
+
+.bp-ui-radio--pill .bp-ui-radio__option:hover {
+  border-color: #111111;
+}
+
+.bp-ui-radio--pill .bp-ui-radio__option.is-selected {
+  border-color: #111111;
+  background: #111111;
+}
+
+.bp-ui-radio--pill .bp-ui-radio__option.is-selected .bp-ui-radio__option-label {
+  color: #ffffff;
+}
+
+.bp-ui-radio--sm .bp-ui-radio__option {
+  padding: 0.8rem;
+}
+
+.bp-ui-radio--sm .bp-ui-radio__option-label {
+  font-size: 0.9rem;
+}
+
+.bp-ui-radio--sm .bp-ui-radio__sublabel {
+  font-size: 0.84rem;
+}
+
+.bp-ui-radio--lg .bp-ui-radio__option {
+  padding: 1.15rem 1.2rem;
+}
+
+.bp-ui-radio--lg .bp-ui-radio__option-label {
+  font-size: 1.05rem;
+}
+
+.bp-ui-radio--lg .bp-ui-radio__sublabel {
+  font-size: 0.95rem;
+}
+
+.bp-ui-radio.is-disabled {
+  opacity: 0.72;
+}
+
+@media (max-width: 640px) {
+  .bp-ui-radio {
+    width: 100%;
+  }
+}

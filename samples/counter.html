@@ -17,7 +17,7 @@
       background:
         radial-gradient(circle at top left, rgba(20, 184, 166, 0.16), transparent 28%),
         radial-gradient(circle at top right, rgba(249, 115, 22, 0.12), transparent 24%),
-        linear-gradient(180deg, #08111f 0%, #0e1728 52%, #e7edf4 52%, #f4f7fb 100%);
+        linear-gradient(180deg, #08111f 0%, #0e1728 50%, #e7edf4 50%, #f4f7fb 100%);
     }
 
     body {
@@ -87,12 +87,6 @@
       text-transform: uppercase;
     }
 
-    .sample-grid {
-      display: grid;
-      gap: 1rem;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    }
-
     .sample-caption {
       margin: 0 0 0.85rem;
       font-size: 0.88rem;
@@ -100,8 +94,18 @@
     }
 
     .sample-log {
-      min-height: 15rem;
+      min-height: 16rem;
       max-height: 24rem;
+    }
+
+    .sample-rule-list {
+      margin: 0;
+      padding-left: 1.1rem;
+      color: #334155;
+    }
+
+    .sample-rule-list li + li {
+      margin-top: 0.65rem;
     }
   </style>
 </head>
@@ -109,34 +113,37 @@
   <main class="py-10 md:py-16">
     <div class="sample-shell space-y-8">
       <section class="sample-card rounded-[2rem] px-6 py-8 shadow-2xl shadow-cyan-950/20 md:px-10 md:py-12">
-        <div class="grid gap-8 lg:grid-cols-[1.5fr_1fr] lg:items-end">
+        <div class="grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-end">
           <div class="space-y-5">
-            <span class="sample-kicker">bp-ui starter</span>
-            <h1 class="text-4xl font-bold tracking-tight text-white md:text-6xl">Counter component built once for vanilla JS and Alpine.</h1>
+            <span class="sample-kicker">bp-ui first component</span>
+            <h1 class="text-4xl font-bold tracking-tight text-white md:text-6xl">Counter UI built once, then reused in vanilla JS and Alpine.</h1>
             <p class="max-w-2xl text-base leading-7 text-slate-300 md:text-lg">
-              This first component establishes the library contract: shared <code class="text-teal-200">bp-ui-*</code> classes, plain CSS variables,
-              ready-made HTML snippets, and one behavior core reused by both the vanilla controller and the Alpine adapter.
+              This page defines the `bp-ui` contract for future components: shared `bp-ui-*` classes, one framework-agnostic behavior core,
+              library-owned CSS, and ready-made snippets that can be pasted into future projects.
             </p>
             <div class="flex flex-wrap gap-3 text-sm text-slate-200">
-              <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2">Shared DOM contract</span>
+              <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2">One DOM contract</span>
               <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2">Tailwind optional</span>
-              <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2">Bubbling custom events</span>
+              <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2">Alpine adapter over shared core</span>
             </div>
           </div>
           <div class="sample-card--light rounded-[1.75rem] p-6 shadow-xl shadow-slate-900/10">
-            <p class="sample-caption">Quick import path</p>
-            <pre class="sample-code"><code>import { initBPUICounters, bpUICounter } from '@braudypedrosa/bp-ui-components';
-import '@braudypedrosa/bp-ui-components/styles';</code></pre>
+            <p class="sample-caption">Default imports</p>
+            <pre class="sample-code"><code>import '@braudypedrosa/bp-ui-components/styles';
+import { initBPUICounters } from '@braudypedrosa/bp-ui-components';</code></pre>
+            <p class="mb-0 mt-4 text-sm leading-6 text-slate-600">
+              Alpine usage loads the same package before Alpine starts so <code>window.bpUICounter(...)</code> is available to <code>x-data</code>.
+            </p>
           </div>
         </div>
       </section>
 
-      <section class="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-        <article class="sample-card--light rounded-[1.75rem] p-6 shadow-xl shadow-slate-900/10 md:p-8">
+      <section class="grid gap-6 lg:grid-cols-2 lg:items-start">
+        <article class="sample-card--light min-w-0 rounded-[1.75rem] p-6 shadow-xl shadow-slate-900/10 md:p-8">
           <div class="mb-6 flex items-center justify-between gap-4">
             <div>
-              <h2 class="text-2xl font-bold tracking-tight text-slate-900">Vanilla basic example</h2>
-              <p class="sample-caption">Auto-initialized from <code>data-bp-ui-counter</code> and ready to paste into future projects.</p>
+              <h2 class="text-2xl font-bold tracking-tight text-slate-900">Vanilla live example</h2>
+              <p class="sample-caption">Auto-initialized from <code>data-bp-ui-counter</code>. This is the copy-paste baseline for future projects.</p>
             </div>
             <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Vanilla</span>
           </div>
@@ -145,7 +152,7 @@ import '@braudypedrosa/bp-ui-components/styles';</code></pre>
             <div
               class="bp-ui-counter"
               data-bp-ui-counter
-              data-demo-name="Vanilla basic"
+              data-demo-name="Vanilla"
               data-value="2"
               data-min="0"
               data-max="8"
@@ -157,258 +164,132 @@ import '@braudypedrosa/bp-ui-components/styles';</code></pre>
                 <input class="bp-ui-counter__input" type="number" inputmode="numeric" aria-label="Seat count" />
               </div>
               <button class="bp-ui-counter__button bp-ui-counter__button--increment" type="button" aria-label="Increase seat count">+</button>
-              <div class="bp-ui-counter__hint">Shared markup, no framework required.</div>
+              <div class="bp-ui-counter__hint">Shared markup, library CSS, no framework dependency.</div>
               <div class="bp-ui-counter__status" hidden></div>
             </div>
 
             <div class="min-w-[16rem] flex-1 space-y-3 rounded-[1.5rem] border border-slate-200 bg-slate-50 p-5">
-              <p class="m-0 text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">What to expect</p>
+              <p class="m-0 text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">What it proves</p>
               <ul class="m-0 space-y-2 pl-5 text-sm leading-6 text-slate-700">
-                <li>Buttons disable at bounds.</li>
-                <li>Typing commits on blur or Enter.</li>
-                <li>Arrow up and down change the value.</li>
-                <li>Changes emit bubbling custom events.</li>
+                <li>One init call wires up the snippet.</li>
+                <li>Buttons disable at min and max.</li>
+                <li>Blur, Enter, ArrowUp, and ArrowDown all work.</li>
+                <li>Vanilla interactions emit bubbling counter events.</li>
               </ul>
             </div>
           </div>
         </article>
 
-        <aside class="sample-card rounded-[1.75rem] p-6 shadow-2xl shadow-cyan-950/20 md:p-8">
+        <aside class="sample-card min-w-0 rounded-[1.75rem] p-6 shadow-2xl shadow-cyan-950/20 md:p-8">
           <div class="mb-4">
             <h2 class="text-2xl font-bold tracking-tight text-white">Event log</h2>
-            <p class="m-0 text-sm leading-6 text-slate-300">The vanilla controller dispatches <code class="text-teal-200">change</code>, <code class="text-teal-200">min</code>, and <code class="text-teal-200">max</code> events.</p>
+            <p class="m-0 text-sm leading-6 text-slate-300">
+              The vanilla controller dispatches <code class="text-teal-200">bp-ui:counter:change</code>,
+              <code class="text-teal-200">bp-ui:counter:min</code>, and <code class="text-teal-200">bp-ui:counter:max</code>.
+            </p>
           </div>
           <pre id="event-log" class="sample-code sample-log"><code>Waiting for counter interactions...</code></pre>
         </aside>
       </section>
 
-      <section class="sample-card--light rounded-[1.75rem] p-6 shadow-xl shadow-slate-900/10 md:p-8">
-        <div class="mb-6 flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <h2 class="text-2xl font-bold tracking-tight text-slate-900">Alpine + Tailwind example</h2>
-            <p class="sample-caption">Tailwind handles layout and card framing. The counter styling still comes from the library CSS.</p>
-          </div>
-          <span class="rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-teal-700">Alpine</span>
-        </div>
-
-        <div class="grid gap-6 rounded-[1.75rem] bg-slate-950 p-6 text-white md:grid-cols-[1.1fr_0.9fr]">
-          <div class="space-y-4">
-            <div class="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-teal-200">
-              Tailwind wrapper
+      <section class="grid gap-6 lg:grid-cols-2 lg:items-start">
+        <article class="sample-card--light min-w-0 rounded-[1.75rem] p-6 shadow-xl shadow-slate-900/10 md:p-8">
+          <div class="mb-6 flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h2 class="text-2xl font-bold tracking-tight text-slate-900">Alpine + Tailwind live example</h2>
+              <p class="sample-caption">Tailwind frames the card. The counter internals still rely only on the shared `bp-ui` contract.</p>
             </div>
-            <h3 class="text-3xl font-bold tracking-tight">Use the same counter inside an Alpine card without rewriting the component.</h3>
-            <p class="m-0 max-w-xl text-sm leading-7 text-slate-300">
-              The markup stays aligned with vanilla. Alpine only supplies the adapter state and bindings.
-            </p>
+            <span class="rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-teal-700">Alpine</span>
           </div>
 
-          <div class="rounded-[1.5rem] border border-white/10 bg-white/95 p-5 text-slate-900 shadow-xl shadow-cyan-950/10">
-            <div
-              class="bp-ui-counter bp-ui-counter--soft bp-ui-counter--md bp-ui-counter--horizontal"
-              x-data="window.bpUICounter({ value: 3, min: 1, max: 12, step: 3, variant: 'soft' })"
-              x-init="init()"
-              role="group"
-              aria-label="Guest counter"
-              :class="{
-                'is-at-min': !canDecrement(),
-                'is-at-max': !canIncrement(),
-                'is-disabled': disabled,
-                'is-loading': loading
-              }"
-            >
-              <div class="bp-ui-counter__label">Guests</div>
-              <button
-                class="bp-ui-counter__button bp-ui-counter__button--decrement"
-                type="button"
-                aria-label="Decrease guest count"
-                @click="decrement()"
-                :disabled="!canDecrement()"
-              >
-                -
-              </button>
-              <div class="bp-ui-counter__field">
-                <input
-                  class="bp-ui-counter__input"
-                  type="number"
-                  inputmode="numeric"
-                  aria-label="Guest count"
-                  x-model="inputValue"
-                  :min="min"
-                  :max="max"
-                  :step="step"
-                  @input="onInput($event)"
-                  @blur="commitInput($event)"
-                  @keydown.enter.prevent="commitInput($event)"
-                  @keydown.arrow-up.prevent="increment()"
-                  @keydown.arrow-down.prevent="decrement()"
-                />
+          <div class="rounded-[1.75rem] bg-slate-950 p-6 text-white">
+            <div class="mb-5 space-y-3">
+              <div class="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-teal-200">
+                Tailwind wrapper only
               </div>
-              <button
-                class="bp-ui-counter__button bp-ui-counter__button--increment"
-                type="button"
-                aria-label="Increase guest count"
-                @click="increment()"
-                :disabled="!canIncrement()"
+              <h3 class="text-3xl font-bold tracking-tight">Use the same control inside Alpine without maintaining a second counter implementation.</h3>
+              <p class="m-0 max-w-xl text-sm leading-7 text-slate-300">
+                Alpine binds to a thin adapter over the same state core. The class names, sizing modifiers, variants, and interaction rules stay shared.
+              </p>
+            </div>
+
+            <div class="rounded-[1.5rem] border border-white/10 bg-white/95 p-5 text-slate-900 shadow-xl shadow-cyan-950/10">
+              <div
+                class="bp-ui-counter bp-ui-counter--soft bp-ui-counter--md bp-ui-counter--horizontal"
+                data-demo-name="Alpine"
+                x-data="window.bpUICounter({ value: 3, min: 1, max: 12, step: 3, variant: 'soft' })"
+                x-init="init()"
+                role="group"
+                aria-label="Guest counter"
+                :class="{
+                  'is-at-min': !canDecrement(),
+                  'is-at-max': !canIncrement(),
+                  'is-disabled': disabled,
+                  'is-loading': loading
+                }"
               >
-                +
-              </button>
-              <div class="bp-ui-counter__hint">Tailwind frames the card. bp-ui owns the control.</div>
-              <div class="bp-ui-counter__status" hidden></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="sample-card--light rounded-[1.75rem] p-6 shadow-xl shadow-slate-900/10 md:p-8">
-        <div class="mb-6">
-          <h2 class="text-2xl font-bold tracking-tight text-slate-900">Variants and states</h2>
-          <p class="sample-caption">These all reuse the same HTML contract and initialization flow.</p>
-        </div>
-
-        <div class="sample-grid">
-          <div class="rounded-[1.4rem] border border-slate-200 bg-white p-5">
-            <p class="sample-caption">Default</p>
-            <div class="bp-ui-counter" data-bp-ui-counter data-demo-name="Default variant" data-value="2" data-min="0" data-max="6">
-              <div class="bp-ui-counter__label">Units</div>
-              <button class="bp-ui-counter__button bp-ui-counter__button--decrement" type="button" aria-label="Decrease units">-</button>
-              <div class="bp-ui-counter__field"><input class="bp-ui-counter__input" type="number" inputmode="numeric" aria-label="Unit count" /></div>
-              <button class="bp-ui-counter__button bp-ui-counter__button--increment" type="button" aria-label="Increase units">+</button>
-              <div class="bp-ui-counter__hint">Default variant</div>
-              <div class="bp-ui-counter__status" hidden></div>
-            </div>
-          </div>
-
-          <div class="rounded-[1.4rem] border border-slate-200 bg-white p-5">
-            <p class="sample-caption">Outline</p>
-            <div class="bp-ui-counter" data-bp-ui-counter data-demo-name="Outline variant" data-value="5" data-min="1" data-max="9" data-variant="outline">
-              <div class="bp-ui-counter__label">Nights</div>
-              <button class="bp-ui-counter__button bp-ui-counter__button--decrement" type="button" aria-label="Decrease night count">-</button>
-              <div class="bp-ui-counter__field"><input class="bp-ui-counter__input" type="number" inputmode="numeric" aria-label="Night count" /></div>
-              <button class="bp-ui-counter__button bp-ui-counter__button--increment" type="button" aria-label="Increase night count">+</button>
-              <div class="bp-ui-counter__hint">Outline variant</div>
-              <div class="bp-ui-counter__status" hidden></div>
-            </div>
-          </div>
-
-          <div class="rounded-[1.4rem] border border-slate-200 bg-white p-5">
-            <p class="sample-caption">Soft</p>
-            <div class="bp-ui-counter" data-bp-ui-counter data-demo-name="Soft variant" data-value="3" data-min="0" data-max="12" data-step="3" data-variant="soft">
-              <div class="bp-ui-counter__label">Guests</div>
-              <button class="bp-ui-counter__button bp-ui-counter__button--decrement" type="button" aria-label="Decrease guest count">-</button>
-              <div class="bp-ui-counter__field"><input class="bp-ui-counter__input" type="number" inputmode="numeric" aria-label="Guest count" /></div>
-              <button class="bp-ui-counter__button bp-ui-counter__button--increment" type="button" aria-label="Increase guest count">+</button>
-              <div class="bp-ui-counter__hint">Soft accent skin</div>
-              <div class="bp-ui-counter__status" hidden></div>
-            </div>
-          </div>
-
-          <div class="rounded-[1.4rem] border border-slate-200 bg-white p-5">
-            <p class="sample-caption">Small</p>
-            <div class="bp-ui-counter" data-bp-ui-counter data-demo-name="Small size" data-size="sm" data-value="1" data-min="0" data-max="4">
-              <div class="bp-ui-counter__label">Kids</div>
-              <button class="bp-ui-counter__button bp-ui-counter__button--decrement" type="button" aria-label="Decrease kids count">-</button>
-              <div class="bp-ui-counter__field"><input class="bp-ui-counter__input" type="number" inputmode="numeric" aria-label="Kid count" /></div>
-              <button class="bp-ui-counter__button bp-ui-counter__button--increment" type="button" aria-label="Increase kids count">+</button>
-              <div class="bp-ui-counter__hint">Compact footprint</div>
-              <div class="bp-ui-counter__status" hidden></div>
-            </div>
-          </div>
-
-          <div class="rounded-[1.4rem] border border-slate-200 bg-white p-5">
-            <p class="sample-caption">Medium</p>
-            <div class="bp-ui-counter" data-bp-ui-counter data-demo-name="Medium size" data-size="md" data-value="4" data-min="0" data-max="10">
-              <div class="bp-ui-counter__label">Bags</div>
-              <button class="bp-ui-counter__button bp-ui-counter__button--decrement" type="button" aria-label="Decrease bag count">-</button>
-              <div class="bp-ui-counter__field"><input class="bp-ui-counter__input" type="number" inputmode="numeric" aria-label="Bag count" /></div>
-              <button class="bp-ui-counter__button bp-ui-counter__button--increment" type="button" aria-label="Increase bag count">+</button>
-              <div class="bp-ui-counter__hint">Default size</div>
-              <div class="bp-ui-counter__status" hidden></div>
-            </div>
-          </div>
-
-          <div class="rounded-[1.4rem] border border-slate-200 bg-white p-5">
-            <p class="sample-caption">Large</p>
-            <div class="bp-ui-counter" data-bp-ui-counter data-demo-name="Large size" data-size="lg" data-value="6" data-min="2" data-max="16" data-step="2">
-              <div class="bp-ui-counter__label">Credits</div>
-              <button class="bp-ui-counter__button bp-ui-counter__button--decrement" type="button" aria-label="Decrease credit count">-</button>
-              <div class="bp-ui-counter__field"><input class="bp-ui-counter__input" type="number" inputmode="numeric" aria-label="Credit count" /></div>
-              <button class="bp-ui-counter__button bp-ui-counter__button--increment" type="button" aria-label="Increase credit count">+</button>
-              <div class="bp-ui-counter__hint">Larger tap targets</div>
-              <div class="bp-ui-counter__status" hidden></div>
-            </div>
-          </div>
-
-          <div class="rounded-[1.4rem] border border-slate-200 bg-white p-5">
-            <p class="sample-caption">Vertical</p>
-            <div class="bp-ui-counter" data-bp-ui-counter data-demo-name="Vertical layout" data-layout="vertical" data-value="2" data-min="0" data-max="5">
-              <div class="bp-ui-counter__label">Floors</div>
-              <button class="bp-ui-counter__button bp-ui-counter__button--decrement" type="button" aria-label="Decrease floor count">-</button>
-              <div class="bp-ui-counter__field"><input class="bp-ui-counter__input" type="number" inputmode="numeric" aria-label="Floor count" /></div>
-              <button class="bp-ui-counter__button bp-ui-counter__button--increment" type="button" aria-label="Increase floor count">+</button>
-              <div class="bp-ui-counter__hint">Vertical variant</div>
-              <div class="bp-ui-counter__status" hidden></div>
-            </div>
-          </div>
-
-          <div class="rounded-[1.4rem] border border-slate-200 bg-white p-5">
-            <p class="sample-caption">Disabled</p>
-            <div class="bp-ui-counter" data-bp-ui-counter data-demo-name="Disabled state" data-value="3" data-disabled="true">
-              <div class="bp-ui-counter__label">Locked</div>
-              <button class="bp-ui-counter__button bp-ui-counter__button--decrement" type="button" aria-label="Decrease locked count">-</button>
-              <div class="bp-ui-counter__field"><input class="bp-ui-counter__input" type="number" inputmode="numeric" aria-label="Locked count" /></div>
-              <button class="bp-ui-counter__button bp-ui-counter__button--increment" type="button" aria-label="Increase locked count">+</button>
-              <div class="bp-ui-counter__hint">Disabled state</div>
-              <div class="bp-ui-counter__status" hidden></div>
-            </div>
-          </div>
-
-          <div class="rounded-[1.4rem] border border-slate-200 bg-white p-5">
-            <p class="sample-caption">Loading</p>
-            <div class="bp-ui-counter" data-bp-ui-counter data-demo-name="Loading state" data-value="5" data-loading="true">
-              <div class="bp-ui-counter__label">Syncing</div>
-              <button class="bp-ui-counter__button bp-ui-counter__button--decrement" type="button" aria-label="Decrease syncing count">-</button>
-              <div class="bp-ui-counter__field"><input class="bp-ui-counter__input" type="number" inputmode="numeric" aria-label="Syncing count" /></div>
-              <button class="bp-ui-counter__button bp-ui-counter__button--increment" type="button" aria-label="Increase syncing count">+</button>
-              <div class="bp-ui-counter__hint">Loading blocks interaction</div>
-              <div class="bp-ui-counter__status" data-static="true" data-loading-label="Syncing" data-default-label="Syncing">
-                <span class="bp-ui-counter__spinner"></span>
-                <span class="bp-ui-counter__status-text">Syncing</span>
+                <div class="bp-ui-counter__label">Guests</div>
+                <button
+                  class="bp-ui-counter__button bp-ui-counter__button--decrement"
+                  type="button"
+                  aria-label="Decrease guest count"
+                  @click="decrement()"
+                  :disabled="!canDecrement()"
+                >
+                  -
+                </button>
+                <div class="bp-ui-counter__field">
+                  <input
+                    class="bp-ui-counter__input"
+                    type="number"
+                    inputmode="numeric"
+                    aria-label="Guest count"
+                    x-model="inputValue"
+                    :min="min"
+                    :max="max"
+                    :step="step"
+                    @input="onInput($event)"
+                    @blur="commitInput($event)"
+                    @keydown.enter.prevent="commitInput($event)"
+                    @keydown.arrow-up.prevent="increment()"
+                    @keydown.arrow-down.prevent="decrement()"
+                  />
+                </div>
+                <button
+                  class="bp-ui-counter__button bp-ui-counter__button--increment"
+                  type="button"
+                  aria-label="Increase guest count"
+                  @click="increment()"
+                  :disabled="!canIncrement()"
+                >
+                  +
+                </button>
+                <div class="bp-ui-counter__hint">Tailwind owns the container. bp-ui owns the control.</div>
+                <div class="bp-ui-counter__status" hidden></div>
               </div>
             </div>
           </div>
+        </article>
 
-          <div class="rounded-[1.4rem] border border-slate-200 bg-white p-5">
-            <p class="sample-caption">At minimum</p>
-            <div class="bp-ui-counter" data-bp-ui-counter data-demo-name="Min boundary" data-value="0" data-min="0" data-max="4">
-              <div class="bp-ui-counter__label">Minimum</div>
-              <button class="bp-ui-counter__button bp-ui-counter__button--decrement" type="button" aria-label="Decrease minimum count">-</button>
-              <div class="bp-ui-counter__field"><input class="bp-ui-counter__input" type="number" inputmode="numeric" aria-label="Minimum count" /></div>
-              <button class="bp-ui-counter__button bp-ui-counter__button--increment" type="button" aria-label="Increase minimum count">+</button>
-              <div class="bp-ui-counter__hint">Decrement is disabled</div>
-              <div class="bp-ui-counter__status" hidden></div>
-            </div>
-          </div>
-
-          <div class="rounded-[1.4rem] border border-slate-200 bg-white p-5">
-            <p class="sample-caption">At maximum</p>
-            <div class="bp-ui-counter" data-bp-ui-counter data-demo-name="Max boundary" data-value="4" data-min="0" data-max="4">
-              <div class="bp-ui-counter__label">Maximum</div>
-              <button class="bp-ui-counter__button bp-ui-counter__button--decrement" type="button" aria-label="Decrease maximum count">-</button>
-              <div class="bp-ui-counter__field"><input class="bp-ui-counter__input" type="number" inputmode="numeric" aria-label="Maximum count" /></div>
-              <button class="bp-ui-counter__button bp-ui-counter__button--increment" type="button" aria-label="Increase maximum count">+</button>
-              <div class="bp-ui-counter__hint">Increment is disabled</div>
-              <div class="bp-ui-counter__status" hidden></div>
-            </div>
-          </div>
-        </div>
+        <aside class="sample-card--light min-w-0 rounded-[1.75rem] p-6 shadow-xl shadow-slate-900/10 md:p-8">
+          <h2 class="text-2xl font-bold tracking-tight text-slate-900">Future component rules</h2>
+          <p class="sample-caption">The counter is the reference pattern for the rest of the library.</p>
+          <ul class="sample-rule-list text-sm leading-7">
+            <li><strong>Structure:</strong> `core` for behavior, `components` for vanilla DOM, `alpine` for adapters, `styles` for library CSS, `samples` for copy-paste demos.</li>
+            <li><strong>Naming:</strong> `.bp-ui-{component}`, `.bp-ui-{component}__{element}`, `.bp-ui-{component}--{modifier}`, `.is-*`, and `data-bp-ui-{component}`.</li>
+            <li><strong>Snippet-first:</strong> publish ready-made HTML first, then keep the JS APIs stable behind it.</li>
+            <li><strong>Tailwind optional:</strong> wrappers can use utilities, but the component internals cannot depend on them.</li>
+            <li><strong>Single behavior source:</strong> Alpine must adapt the same state rules as vanilla, not fork them.</li>
+          </ul>
+        </aside>
       </section>
 
       <section class="grid gap-6 lg:grid-cols-2">
         <article class="sample-card--light rounded-[1.75rem] p-6 shadow-xl shadow-slate-900/10 md:p-8">
           <div class="mb-4 flex items-center justify-between gap-4">
             <div>
-              <h2 class="text-2xl font-bold tracking-tight text-slate-900">Copy-ready vanilla snippet</h2>
-              <p class="sample-caption">This is the markup the library auto-initializes.</p>
+              <h2 class="text-2xl font-bold tracking-tight text-slate-900">Canonical vanilla snippet</h2>
+              <p class="sample-caption">This is the stable snippet the library auto-initializes.</p>
             </div>
             <button class="sample-copy" data-copy-target="vanilla-snippet">Copy</button>
           </div>
@@ -434,41 +315,49 @@ import '@braudypedrosa/bp-ui-components/styles';</code></pre>
         <article class="sample-card--light rounded-[1.75rem] p-6 shadow-xl shadow-slate-900/10 md:p-8">
           <div class="mb-4 flex items-center justify-between gap-4">
             <div>
-              <h2 class="text-2xl font-bold tracking-tight text-slate-900">Copy-ready Alpine snippet</h2>
-              <p class="sample-caption">Same markup contract, Alpine state adapter layered on top.</p>
+              <h2 class="text-2xl font-bold tracking-tight text-slate-900">Canonical Alpine snippet</h2>
+              <p class="sample-caption">Same `bp-ui-counter` internals, with Alpine state and Tailwind around the outside.</p>
             </div>
             <button class="sample-copy" data-copy-target="alpine-snippet">Copy</button>
           </div>
-          <pre class="sample-code"><code id="alpine-snippet">&lt;div
-  class="bp-ui-counter bp-ui-counter--soft bp-ui-counter--md bp-ui-counter--horizontal"
-  x-data="window.bpUICounter({ value: 3, min: 1, max: 12, step: 3, variant: 'soft' })"
-  x-init="init()"
-  role="group"
-  aria-label="Guest counter"
-  :class="{ 'is-at-min': !canDecrement(), 'is-at-max': !canIncrement(), 'is-disabled': disabled, 'is-loading': loading }"
-&gt;
-  &lt;div class="bp-ui-counter__label"&gt;Guests&lt;/div&gt;
-  &lt;button class="bp-ui-counter__button bp-ui-counter__button--decrement" type="button" aria-label="Decrease guest count" @click="decrement()" :disabled="!canDecrement()"&gt;-&lt;/button&gt;
-  &lt;div class="bp-ui-counter__field"&gt;
-    &lt;input
-      class="bp-ui-counter__input"
-      type="number"
-      inputmode="numeric"
-      aria-label="Guest count"
-      x-model="inputValue"
-      :min="min"
-      :max="max"
-      :step="step"
-      @input="onInput($event)"
-      @blur="commitInput($event)"
-      @keydown.enter.prevent="commitInput($event)"
-      @keydown.arrow-up.prevent="increment()"
-      @keydown.arrow-down.prevent="decrement()"
-    /&gt;
+          <pre class="sample-code"><code id="alpine-snippet">&lt;script type="module"&gt;
+  import '@braudypedrosa/bp-ui-components/styles';
+  import '@braudypedrosa/bp-ui-components';
+&lt;/script&gt;
+&lt;script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"&gt;&lt;/script&gt;
+
+&lt;div class="rounded-[1.5rem] border border-slate-200 bg-white p-5 shadow-sm"&gt;
+  &lt;div
+    class="bp-ui-counter bp-ui-counter--soft bp-ui-counter--md bp-ui-counter--horizontal"
+    x-data="window.bpUICounter({ value: 3, min: 1, max: 12, step: 3, variant: 'soft' })"
+    x-init="init()"
+    role="group"
+    aria-label="Guest counter"
+    :class="{ 'is-at-min': !canDecrement(), 'is-at-max': !canIncrement(), 'is-disabled': disabled, 'is-loading': loading }"
+  &gt;
+    &lt;div class="bp-ui-counter__label"&gt;Guests&lt;/div&gt;
+    &lt;button class="bp-ui-counter__button bp-ui-counter__button--decrement" type="button" aria-label="Decrease guest count" @click="decrement()" :disabled="!canDecrement()"&gt;-&lt;/button&gt;
+    &lt;div class="bp-ui-counter__field"&gt;
+      &lt;input
+        class="bp-ui-counter__input"
+        type="number"
+        inputmode="numeric"
+        aria-label="Guest count"
+        x-model="inputValue"
+        :min="min"
+        :max="max"
+        :step="step"
+        @input="onInput($event)"
+        @blur="commitInput($event)"
+        @keydown.enter.prevent="commitInput($event)"
+        @keydown.arrow-up.prevent="increment()"
+        @keydown.arrow-down.prevent="decrement()"
+      /&gt;
+    &lt;/div&gt;
+    &lt;button class="bp-ui-counter__button bp-ui-counter__button--increment" type="button" aria-label="Increase guest count" @click="increment()" :disabled="!canIncrement()"&gt;+&lt;/button&gt;
+    &lt;div class="bp-ui-counter__hint"&gt;Tailwind can wrap the layout without owning the component styling.&lt;/div&gt;
+    &lt;div class="bp-ui-counter__status" hidden&gt;&lt;/div&gt;
   &lt;/div&gt;
-  &lt;button class="bp-ui-counter__button bp-ui-counter__button--increment" type="button" aria-label="Increase guest count" @click="increment()" :disabled="!canIncrement()"&gt;+&lt;/button&gt;
-  &lt;div class="bp-ui-counter__hint"&gt;Tailwind can wrap the layout without owning the component styling.&lt;/div&gt;
-  &lt;div class="bp-ui-counter__status" hidden&gt;&lt;/div&gt;
 &lt;/div&gt;</code></pre>
         </article>
       </section>

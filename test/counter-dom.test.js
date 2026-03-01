@@ -65,6 +65,20 @@ describe('BPUICounter', () => {
     expect(input.value).toBe('8');
   });
 
+  it('supports arrow up and arrow down keyboard controls', () => {
+    document.body.innerHTML = createCounterMarkup('data-value="2" data-min="0" data-max="4"');
+    const root = document.querySelector('.bp-ui-counter');
+    const counter = new BPUICounter(root);
+    const input = root.querySelector('.bp-ui-counter__input');
+
+    input.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, key: 'ArrowUp' }));
+    input.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, key: 'ArrowDown' }));
+    input.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, key: 'ArrowDown' }));
+
+    expect(counter.getValue()).toBe(1);
+    expect(input.value).toBe('1');
+  });
+
   it('disables boundary buttons correctly', () => {
     document.body.innerHTML = createCounterMarkup('data-value="0" data-min="0" data-max="1"');
     const root = document.querySelector('.bp-ui-counter');

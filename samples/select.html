@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bp-ui Select</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%96%BE%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/src/styles/index.css" />
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: "Space Grotesk", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(20, 184, 166, 0.16), transparent 28%),
+        radial-gradient(circle at top right, rgba(249, 115, 22, 0.12), transparent 24%),
+        linear-gradient(180deg, #08111f 0%, #0e1728 50%, #e7edf4 50%, #f4f7fb 100%);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: #dce7f3;
+    }
+
+    .sample-shell {
+      width: min(1120px, calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .sample-card {
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(18px);
+    }
+
+    .sample-card--light {
+      border-color: rgba(15, 23, 42, 0.08);
+      background: rgba(255, 255, 255, 0.92);
+      color: #0f172a;
+      backdrop-filter: blur(12px);
+    }
+
+    .sample-code {
+      margin: 0;
+      overflow-x: auto;
+      border-radius: 1rem;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      background: #0f172a;
+      color: #d7e7f7;
+      padding: 1rem;
+      font: 0.875rem/1.6 "IBM Plex Mono", monospace;
+    }
+
+    .sample-code code {
+      display: block;
+      white-space: pre;
+    }
+
+    .sample-copy {
+      border: 0;
+      border-radius: 999px;
+      padding: 0.55rem 0.9rem;
+      background: #14b8a6;
+      color: #042f2e;
+      font: 600 0.8rem/1 "Space Grotesk", sans-serif;
+      cursor: pointer;
+    }
+
+    .sample-copy:hover {
+      background: #2dd4bf;
+    }
+
+    .sample-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      border-radius: 999px;
+      padding: 0.45rem 0.75rem;
+      background: rgba(20, 184, 166, 0.14);
+      color: #99f6e4;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .sample-caption {
+      margin: 0 0 0.85rem;
+      font-size: 0.88rem;
+      color: #64748b;
+    }
+
+    .sample-log {
+      min-height: 14rem;
+      max-height: 22rem;
+    }
+
+  </style>
+</head>
+<body>
+  <main class="py-10 md:py-16">
+    <div class="sample-shell space-y-8">
+      <section class="sample-card rounded-[2rem] px-6 py-8 shadow-2xl shadow-cyan-950/20 md:px-10 md:py-12">
+        <div class="grid gap-8 lg:grid-cols-[1.45fr_1fr] lg:items-end">
+          <div class="space-y-5">
+            <span class="sample-kicker">bp-ui dropdown</span>
+            <h1 class="text-4xl font-bold tracking-tight text-white md:text-6xl">Single select with viewport-aware edge detection.</h1>
+            <p class="max-w-2xl text-base leading-7 text-slate-300 md:text-lg">
+              `bp-ui-select` is the shared select contract for future projects: stable HTML, bubbling events,
+              fixed-position popovers, and edge-aware placement that keeps the option list visible near viewport boundaries.
+            </p>
+            <div class="flex flex-wrap gap-3 text-sm text-slate-200">
+              <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2">Single-select only</span>
+              <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2">Above/below flip</span>
+              <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2">Horizontal clamping</span>
+            </div>
+          </div>
+          <div class="sample-card--light rounded-[1.75rem] p-6 shadow-xl shadow-slate-900/10">
+            <p class="sample-caption">Behavior split</p>
+            <p class="m-0 text-sm leading-6 text-slate-600">
+              The vanilla controller owns viewport-aware popover placement. The Alpine adapter reuses the same option state and selection rules
+              when the wrapper wants to manage placement itself.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid gap-6 lg:grid-cols-2 lg:items-start">
+        <article class="sample-card--light min-w-0 rounded-[1.75rem] p-6 shadow-xl shadow-slate-900/10 md:p-8">
+          <div class="mb-6 flex items-center justify-between gap-4">
+            <div>
+              <h2 class="text-2xl font-bold tracking-tight text-slate-900">Vanilla live example</h2>
+              <p class="sample-caption">The root contract is markup-first. The controller reads the DOM options and handles positioning and keyboard support.</p>
+            </div>
+            <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Vanilla</span>
+          </div>
+
+          <div
+            class="bp-ui-select"
+            data-bp-ui-select
+            data-demo-name="Default select"
+            data-name="propertyType"
+            data-placeholder="Choose a property type"
+          >
+            <div class="bp-ui-select__label">Property Type</div>
+            <button class="bp-ui-select__trigger" type="button" aria-haspopup="listbox">
+              <span class="bp-ui-select__trigger-value">Choose a property type</span>
+              <span class="bp-ui-select__trigger-chevron" aria-hidden="true"></span>
+            </button>
+            <input class="bp-ui-select__input" type="hidden" />
+            <div class="bp-ui-select__popover" role="listbox">
+              <button class="bp-ui-select__option" type="button" data-value="villa">
+                <span class="bp-ui-select__option-label">Villa</span>
+                <span class="bp-ui-select__option-indicator" aria-hidden="true"></span>
+              </button>
+              <button class="bp-ui-select__option" type="button" data-value="cabin">
+                <span class="bp-ui-select__option-label">Cabin</span>
+                <span class="bp-ui-select__option-indicator" aria-hidden="true"></span>
+              </button>
+              <button class="bp-ui-select__option" type="button" data-value="suite">
+                <span class="bp-ui-select__option-label">Suite</span>
+                <span class="bp-ui-select__option-indicator" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div class="bp-ui-select__hint">Use Enter, Space, Arrow keys, Home, End, and Escape.</div>
+            <div class="bp-ui-select__status" hidden></div>
+          </div>
+        </article>
+
+        <aside class="sample-card min-w-0 rounded-[1.75rem] p-6 shadow-2xl shadow-cyan-950/20 md:p-8">
+          <div class="mb-4">
+            <h2 class="text-2xl font-bold tracking-tight text-white">Event log</h2>
+            <p class="m-0 text-sm leading-6 text-slate-300">
+              The vanilla select dispatches <code class="text-teal-200">bp-ui:select:open</code>,
+              <code class="text-teal-200">bp-ui:select:close</code>, and
+              <code class="text-teal-200">bp-ui:select:change</code>.
+            </p>
+          </div>
+          <pre id="event-log" class="sample-code sample-log"><code>Waiting for select interactions...</code></pre>
+        </aside>
+      </section>
+
+      <section class="grid gap-6 lg:grid-cols-2 lg:items-start">
+        <article class="sample-card--light min-w-0 rounded-[1.75rem] p-6 shadow-xl shadow-slate-900/10 md:p-8">
+          <div class="mb-6">
+            <h2 class="text-2xl font-bold tracking-tight text-slate-900">Edge detection proof</h2>
+            <p class="sample-caption">Open the right-aligned select near the edge. The popover will clamp horizontally instead of overflowing off-screen.</p>
+          </div>
+
+          <div class="space-y-6">
+            <div class="bp-ui-select bp-ui-select--outline" data-bp-ui-select data-demo-name="Left edge proof" data-placeholder="Pick a view">
+              <div class="bp-ui-select__label">Left anchored</div>
+              <button class="bp-ui-select__trigger" type="button" aria-haspopup="listbox">
+                <span class="bp-ui-select__trigger-value">Pick a view</span>
+                <span class="bp-ui-select__trigger-chevron" aria-hidden="true"></span>
+              </button>
+              <input class="bp-ui-select__input" type="hidden" />
+              <div class="bp-ui-select__popover" role="listbox">
+                <button class="bp-ui-select__option" type="button" data-value="ocean">
+                  <span class="bp-ui-select__option-label">Ocean</span>
+                  <span class="bp-ui-select__option-indicator" aria-hidden="true"></span>
+                </button>
+                <button class="bp-ui-select__option" type="button" data-value="garden">
+                  <span class="bp-ui-select__option-label">Garden</span>
+                  <span class="bp-ui-select__option-indicator" aria-hidden="true"></span>
+                </button>
+                <button class="bp-ui-select__option" type="button" data-value="city">
+                  <span class="bp-ui-select__option-label">City</span>
+                  <span class="bp-ui-select__option-indicator" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
+
+            <div class="flex justify-end">
+              <div class="bp-ui-select bp-ui-select--soft" data-bp-ui-select data-demo-name="Right edge proof" data-placeholder="Pick a vibe">
+                <div class="bp-ui-select__label">Right anchored</div>
+                <button class="bp-ui-select__trigger" type="button" aria-haspopup="listbox">
+                  <span class="bp-ui-select__trigger-value">Pick a vibe</span>
+                  <span class="bp-ui-select__trigger-chevron" aria-hidden="true"></span>
+                </button>
+                <input class="bp-ui-select__input" type="hidden" />
+                <div class="bp-ui-select__popover" role="listbox">
+                  <button class="bp-ui-select__option" type="button" data-value="quiet">
+                    <span class="bp-ui-select__option-label">Quiet Retreat</span>
+                    <span class="bp-ui-select__option-indicator" aria-hidden="true"></span>
+                  </button>
+                  <button class="bp-ui-select__option" type="button" data-value="social">
+                    <span class="bp-ui-select__option-label">Social Stay</span>
+                    <span class="bp-ui-select__option-indicator" aria-hidden="true"></span>
+                  </button>
+                  <button class="bp-ui-select__option" type="button" data-value="remote">
+                    <span class="bp-ui-select__option-label">Remote Work</span>
+                    <span class="bp-ui-select__option-indicator" aria-hidden="true"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="sample-card--light min-w-0 rounded-[1.75rem] p-6 shadow-xl shadow-slate-900/10 md:p-8">
+          <div class="mb-6 flex items-center justify-between gap-4">
+            <div>
+              <h2 class="text-2xl font-bold tracking-tight text-slate-900">Alpine + Tailwind example</h2>
+              <p class="sample-caption">The Alpine adapter keeps the selected value and open state in sync while still using viewport-aware popover placement.</p>
+            </div>
+            <span class="rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-teal-700">Alpine</span>
+          </div>
+
+          <div
+            class="relative rounded-[1.75rem] border border-slate-200 bg-slate-50 p-5"
+            x-data="window.bpUISelect()"
+            x-init="init()"
+          >
+            <div class="bp-ui-select" data-value="garden">
+              <div class="bp-ui-select__label">Alpine View</div>
+              <button class="bp-ui-select__trigger" type="button" @click="toggle()">
+                <span class="bp-ui-select__trigger-value">Garden</span>
+                <span class="bp-ui-select__trigger-chevron" aria-hidden="true"></span>
+              </button>
+              <input class="bp-ui-select__input" type="hidden" value="garden" />
+              <div class="bp-ui-select__popover" hidden>
+                <button class="bp-ui-select__option" type="button" data-value="ocean" @click="select($event.currentTarget.dataset.value, 'option'); closePopover()">
+                  <span class="bp-ui-select__option-label">Ocean</span>
+                  <span class="bp-ui-select__option-indicator" aria-hidden="true"></span>
+                </button>
+                <button class="bp-ui-select__option is-selected" type="button" data-value="garden" @click="select($event.currentTarget.dataset.value, 'option'); closePopover()">
+                  <span class="bp-ui-select__option-label">Garden</span>
+                  <span class="bp-ui-select__option-indicator" aria-hidden="true"></span>
+                </button>
+                <button class="bp-ui-select__option" type="button" data-value="city" @click="select($event.currentTarget.dataset.value, 'option'); closePopover()">
+                  <span class="bp-ui-select__option-label">City</span>
+                  <span class="bp-ui-select__option-indicator" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
+
+            <div class="mt-4 rounded-2xl bg-slate-950 px-4 py-3 text-sm text-slate-200">
+              Selected value: <span class="font-semibold text-teal-300" x-text="value || 'none'"></span>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="grid gap-6 lg:grid-cols-2">
+        <article class="sample-card--light rounded-[1.75rem] p-6 shadow-xl shadow-slate-900/10 md:p-8">
+          <div class="mb-4 flex items-center justify-between gap-4">
+            <div>
+              <h2 class="text-2xl font-bold tracking-tight text-slate-900">Vanilla snippet</h2>
+              <p class="sample-caption">Copy-ready markup for the stable select contract.</p>
+            </div>
+            <button class="sample-copy" data-copy-target="vanilla-snippet">Copy</button>
+          </div>
+          <pre class="sample-code"><code id="vanilla-snippet">&lt;div class="bp-ui-select" data-bp-ui-select data-placeholder="Choose a property type" data-name="propertyType"&gt;
+  &lt;div class="bp-ui-select__label"&gt;Property Type&lt;/div&gt;
+  &lt;button class="bp-ui-select__trigger" type="button" aria-haspopup="listbox"&gt;
+    &lt;span class="bp-ui-select__trigger-value"&gt;Choose a property type&lt;/span&gt;
+    &lt;span class="bp-ui-select__trigger-chevron" aria-hidden="true"&gt;&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;input class="bp-ui-select__input" type="hidden" /&gt;
+  &lt;div class="bp-ui-select__popover" role="listbox"&gt;
+    &lt;button class="bp-ui-select__option" type="button" data-value="villa"&gt;
+      &lt;span class="bp-ui-select__option-label"&gt;Villa&lt;/span&gt;
+      &lt;span class="bp-ui-select__option-indicator" aria-hidden="true"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;button class="bp-ui-select__option" type="button" data-value="cabin"&gt;
+      &lt;span class="bp-ui-select__option-label"&gt;Cabin&lt;/span&gt;
+      &lt;span class="bp-ui-select__option-indicator" aria-hidden="true"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </article>
+
+        <article class="sample-card--light rounded-[1.75rem] p-6 shadow-xl shadow-slate-900/10 md:p-8">
+          <div class="mb-4 flex items-center justify-between gap-4">
+            <div>
+              <h2 class="text-2xl font-bold tracking-tight text-slate-900">Alpine snippet</h2>
+              <p class="sample-caption">Copy-ready adapter example with the same viewport-aware placement as the vanilla controller.</p>
+            </div>
+            <button class="sample-copy" data-copy-target="alpine-snippet">Copy</button>
+          </div>
+          <pre class="sample-code"><code id="alpine-snippet">&lt;div
+  class="relative rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-sm"
+  x-data="window.bpUISelect()"
+  x-init="init()"
+&gt;
+  &lt;div class="bp-ui-select" data-value="garden"&gt;
+    &lt;div class="bp-ui-select__label"&gt;Alpine View&lt;/div&gt;
+    &lt;button class="bp-ui-select__trigger" type="button" @click="toggle()"&gt;
+      &lt;span class="bp-ui-select__trigger-value"&gt;Garden&lt;/span&gt;
+      &lt;span class="bp-ui-select__trigger-chevron" aria-hidden="true"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;input class="bp-ui-select__input" type="hidden" value="garden" /&gt;
+    &lt;div class="bp-ui-select__popover" hidden&gt;
+      &lt;button class="bp-ui-select__option" type="button" data-value="ocean" @click="select($event.currentTarget.dataset.value, 'option'); closePopover()"&gt;
+        &lt;span class="bp-ui-select__option-label"&gt;Ocean&lt;/span&gt;
+        &lt;span class="bp-ui-select__option-indicator" aria-hidden="true"&gt;&lt;/span&gt;
+      &lt;/button&gt;
+      &lt;button class="bp-ui-select__option is-selected" type="button" data-value="garden" @click="select($event.currentTarget.dataset.value, 'option'); closePopover()"&gt;
+        &lt;span class="bp-ui-select__option-label"&gt;Garden&lt;/span&gt;
+        &lt;span class="bp-ui-select__option-indicator" aria-hidden="true"&gt;&lt;/span&gt;
+      &lt;/button&gt;
+      &lt;button class="bp-ui-select__option" type="button" data-value="city" @click="select($event.currentTarget.dataset.value, 'option'); closePopover()"&gt;
+        &lt;span class="bp-ui-select__option-label"&gt;City&lt;/span&gt;
+        &lt;span class="bp-ui-select__option-indicator" aria-hidden="true"&gt;&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <script type="module">
+    import '/src/index.js';
+
+    function loadAlpine() {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/alpinejs@3.15.0/dist/cdn.min.js';
+        script.defer = true;
+        script.onload = () => resolve();
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+    }
+
+    function attachCopyButtons() {
+      document.querySelectorAll('[data-copy-target]').forEach((button) => {
+        button.addEventListener('click', async () => {
+          const target = document.getElementById(button.dataset.copyTarget);
+
+          if (!target) {
+            return;
+          }
+
+          await navigator.clipboard.writeText(target.textContent);
+          const originalLabel = button.textContent;
+          button.textContent = 'Copied';
+          window.setTimeout(() => {
+            button.textContent = originalLabel;
+          }, 1200);
+        });
+      });
+    }
+
+    function attachEventLog() {
+      const log = document.getElementById('event-log');
+
+      if (!log) {
+        return;
+      }
+
+      const entries = [];
+
+      function push(type, event) {
+        const root = event.target.closest('.bp-ui-select');
+        const detail = event.detail || {};
+        const timestamp = new Date().toLocaleTimeString();
+        const line = `${timestamp}  ${root?.dataset.demoName || 'Select'}  ${type}  value=${detail.value || '-'} previous=${detail.previousValue || '-'} trigger=${detail.trigger || '-'}`;
+
+        entries.unshift(line);
+        log.textContent = entries.slice(0, 12).join('\n');
+      }
+
+      document.addEventListener('bp-ui:select:open', (event) => push('open', event));
+      document.addEventListener('bp-ui:select:close', (event) => push('close', event));
+      document.addEventListener('bp-ui:select:change', (event) => push('change', event));
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      window.initBPUISelects();
+      attachCopyButtons();
+      attachEventLog();
+      await loadAlpine();
+    });
+  </script>
+</body>
+</html>

@@ -8,7 +8,11 @@
   "module": "./dist/bp-ui.js",
   "exports": {
     ".": "./dist/bp-ui.js",
-    "./styles": "./dist/styles/index.css"
+    "./styles": "./dist/styles/index.css",
+    "./styles/counter.css": "./dist/styles/counter.css",
+    "./styles/select.css": "./dist/styles/select.css",
+    "./styles/radio.css": "./dist/styles/radio.css",
+    "./styles/checkbox.css": "./dist/styles/checkbox.css"
   },
   "files": [
     "dist",
@@ -18,12 +22,20 @@
   "scripts": {
     "dev": "vite",
     "test": "vitest run",
-    "build": "rm -rf dist && vite build && mkdir -p dist/styles && cp src/styles/index.css dist/styles/index.css && cp src/styles/counter.css dist/styles/counter.css"
+    "build": "rm -rf dist && vite build && node ./scripts/copy-styles.mjs && node ./scripts/verify-build.mjs",
+    "release": "bash ./scripts/release.sh",
+    "release:patch": "bash ./scripts/release.sh patch",
+    "release:minor": "bash ./scripts/release.sh minor",
+    "release:major": "bash ./scripts/release.sh major",
+    "release:npm": "npm publish"
   },
   "keywords": [
     "ui",
     "components",
     "counter",
+    "select",
+    "radio",
+    "checkbox",
     "design-system",
     "vanilla-js",
     "alpinejs",

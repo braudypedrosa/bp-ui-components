@@ -3,3 +3,11 @@ node_modules/
 .vite/
 coverage/
 .playwright-cli/
+.DS_Store
+samples/*
+!samples/counter.html
+!samples/select.html
+!samples/radio.html
+!samples/checkbox.html
+!samples/references/
+!samples/references/radio-reference.html
