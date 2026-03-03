@@ -145,4 +145,27 @@ describe('BPUICounter', () => {
 
     expect(counter.getValue()).toBe(8);
   });
+
+  it('adds the shared widget reset class to the root', () => {
+    document.body.innerHTML = createCounterMarkup();
+    const root = document.querySelector('.bp-ui-counter');
+
+    new BPUICounter(root);
+
+    expect(root.classList.contains('bp-widget-reset')).toBe(true);
+  });
+
+  it('supports snap-to-step through data attributes', () => {
+    document.body.innerHTML = createCounterMarkup('data-min="1" data-step="2" data-snap-to-step="true"');
+    const root = document.querySelector('.bp-ui-counter');
+    const input = root.querySelector('.bp-ui-counter__input');
+    const counter = new BPUICounter(root);
+
+    input.value = '4.2';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    input.dispatchEvent(new FocusEvent('blur', { bubbles: true }));
+
+    expect(counter.getValue()).toBe(5);
+    expect(input.value).toBe('5');
+  });
 });

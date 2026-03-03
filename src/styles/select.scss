@@ -18,66 +18,6 @@
   gap: 0.5rem;
   width: min(100%, 18rem);
 
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
-
-  button,
-  input,
-  select,
-  textarea {
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    color: inherit;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    background: none;
-    outline: none;
-    box-shadow: none;
-    transition: none;
-    -webkit-appearance: none;
-    appearance: none;
-
-    &:hover,
-    &:focus,
-    &:focus-visible,
-    &:active {
-      border: 0;
-      background: none;
-      outline: none;
-      box-shadow: none;
-      color: inherit;
-      text-decoration: none;
-    }
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-
-    &:hover,
-    &:focus,
-    &:active {
-      color: inherit;
-      text-decoration: none;
-    }
-  }
-
-  label {
-    display: revert;
-    line-height: inherit;
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
-    border: 0;
-  }
-
   .bp-ui-select__label,
   .bp-ui-select__hint,
   .bp-ui-select__status {
@@ -216,43 +156,6 @@
   overflow-y: auto;
   overscroll-behavior: contain;
   box-sizing: border-box;
-
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
-
-  button,
-  input,
-  select,
-  textarea {
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    color: inherit;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    background: none;
-    outline: none;
-    box-shadow: none;
-    transition: none;
-    -webkit-appearance: none;
-    appearance: none;
-
-    &:hover,
-    &:focus,
-    &:focus-visible,
-    &:active {
-      border: 0;
-      background: none;
-      outline: none;
-      box-shadow: none;
-      color: inherit;
-      text-decoration: none;
-    }
-  }
 
   &[hidden] {
     display: none;

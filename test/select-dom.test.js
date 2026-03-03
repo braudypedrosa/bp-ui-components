@@ -165,6 +165,17 @@ describe('BPUISelect', () => {
     expect(popover.classList.contains('bp-ui-select--soft')).toBe(true);
   });
 
+  it('adds the shared widget reset class to the root and popover', () => {
+    document.body.innerHTML = createSelectMarkup();
+    const root = document.querySelector('.bp-ui-select');
+    const popover = root.querySelector('.bp-ui-select__popover');
+
+    new BPUISelect(root);
+
+    expect(root.classList.contains('bp-widget-reset')).toBe(true);
+    expect(popover.classList.contains('bp-widget-reset')).toBe(true);
+  });
+
   it('closes when clicking outside the component', () => {
     document.body.innerHTML = createSelectMarkup();
     const root = document.querySelector('.bp-ui-select');

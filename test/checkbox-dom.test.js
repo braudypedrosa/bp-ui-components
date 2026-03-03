@@ -137,4 +137,13 @@ describe('BPUICheckboxGroup', () => {
     root.querySelector('.bp-ui-checkbox__input[value="pool"]').dispatchEvent(new Event('change', { bubbles: true }));
     expect(checkbox.getValues()).toEqual([]);
   });
+
+  it('adds the shared widget reset class to the root', () => {
+    document.body.innerHTML = createCheckboxMarkup();
+    const root = document.querySelector('.bp-ui-checkbox');
+
+    new BPUICheckboxGroup(root);
+
+    expect(root.classList.contains('bp-widget-reset')).toBe(true);
+  });
 });

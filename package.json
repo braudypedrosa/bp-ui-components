@@ -1,6 +1,6 @@
 {
   "name": "@braudypedrosa/bp-ui-components",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Framework-agnostic bp-ui component library with vanilla JS and Alpine adapters.",
   "author": "Braudy Pedrosa",
   "type": "module",
@@ -12,7 +12,8 @@
     "./styles/counter.css": "./dist/styles/counter.css",
     "./styles/select.css": "./dist/styles/select.css",
     "./styles/radio.css": "./dist/styles/radio.css",
-    "./styles/checkbox.css": "./dist/styles/checkbox.css"
+    "./styles/checkbox.css": "./dist/styles/checkbox.css",
+    "./styles/widget-reset.css": "./dist/styles/widget-reset.css"
   },
   "files": [
     "dist",
@@ -57,9 +58,9 @@
     "access": "public"
   },
   "devDependencies": {
-    "jsdom": "^26.0.0",
-    "sass-embedded": "^1.83.4",
-    "vite": "^6.2.4",
-    "vitest": "^3.1.1"
+    "jsdom": "^28.1.0",
+    "sass-embedded": "^1.97.3",
+    "vite": "^7.3.1",
+    "vitest": "^4.0.18"
   }
 }

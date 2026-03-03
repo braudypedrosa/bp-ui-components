@@ -79,6 +79,11 @@ For the reusable release workflow, versioning rules, and verification steps, see
 - `@braudypedrosa/bp-ui-components/styles/select.css`
 - `@braudypedrosa/bp-ui-components/styles/radio.css`
 - `@braudypedrosa/bp-ui-components/styles/checkbox.css`
+- `@braudypedrosa/bp-ui-components/styles/widget-reset.css`
+
+The full `@braudypedrosa/bp-ui-components/styles` bundle already includes the shared widget reset.
+If you import a component stylesheet directly, also import `widget-reset.css` unless another BP package
+already includes it for that surface.
 
 ## Canonical Usage
 

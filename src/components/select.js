@@ -79,9 +79,11 @@ export class BPUISelect {
       return this.root[INSTANCE_KEY];
     }
 
+    this.root.classList.add('bp-widget-reset');
     const trigger = getRequiredElement(this.root, '.bp-ui-select__trigger');
     const input = getRequiredElement(this.root, '.bp-ui-select__input');
     const popover = getRequiredElement(this.root, '.bp-ui-select__popover');
+    popover.classList.add('bp-widget-reset');
     const optionElements = Array.from(popover.querySelectorAll('.bp-ui-select__option'));
 
     this.elements = {

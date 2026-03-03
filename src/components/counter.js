@@ -26,6 +26,7 @@ function parseDataOptions(element) {
     size: element.dataset.size,
     variant: element.dataset.variant,
     layout: element.dataset.layout,
+    snapToStep: parseBooleanAttribute(element, 'data-snap-to-step'),
     disabled: parseBooleanAttribute(element, 'data-disabled'),
     loading: parseBooleanAttribute(element, 'data-loading'),
   };
@@ -92,6 +93,7 @@ export class BPUICounter {
       return this.root[INSTANCE_KEY];
     }
 
+    this.root.classList.add('bp-widget-reset');
     this.options = mergeOptions(parseDataOptions(this.root), options);
     this.state = createCounterState(this.options);
     this.elements = {

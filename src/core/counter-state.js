@@ -71,6 +71,10 @@ function roundWithPrecision(value, precision) {
   return Number(value.toFixed(Math.min(precision, 10)));
 }
 
+function roundCommittedValue(value) {
+  return Number.parseFloat(value.toFixed(6));
+}
+
 function stepValue(value, step, direction) {
   const precision = Math.max(countDecimalPlaces(value), countDecimalPlaces(step));
   return roundWithPrecision(value + (step * direction), precision);
@@ -94,6 +98,19 @@ function deriveState(state) {
   };
 }
 
+function normalizeValue(value, min, max, step, snapToStep) {
+  const boundedValue = clampValue(value, min, max);
+
+  if (!snapToStep || min == null) {
+    return roundCommittedValue(boundedValue);
+  }
+
+  const stepsFromMin = (boundedValue - min) / step;
+  const snappedValue = min + (Math.round(stepsFromMin) * step);
+
+  return roundCommittedValue(clampValue(snappedValue, min, max));
+}
+
 function normalizeConfig(config = {}) {
   const min = parseNumber(config.min);
   const max = parseNumber(config.max);
@@ -104,12 +121,14 @@ function normalizeConfig(config = {}) {
 
   const step = normalizeStep(config.step);
   const initialValue = parseNumber(config.value) ?? 0;
+  const snapToStep = config.snapToStep === true;
 
   return {
-    value: clampValue(initialValue, min, max),
+    value: normalizeValue(initialValue, min, max, step, snapToStep),
     min,
     max,
     step,
+    snapToStep,
     disabled: config.disabled === true,
     loading: config.loading === true,
     size: normalizeChoice(config.size, VALID_SIZES, 'md'),
@@ -145,7 +164,7 @@ export function createCounterState(config = {}) {
     const parsedValue = parseNumber(nextValue);
     const committedValue = parsedValue == null
       ? previous.value
-      : clampValue(parsedValue, previous.min, previous.max);
+      : normalizeValue(parsedValue, previous.min, previous.max, previous.step, previous.snapToStep);
 
     state = {
       ...state,

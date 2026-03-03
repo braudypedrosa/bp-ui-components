@@ -102,4 +102,32 @@ describe('createCounterState', () => {
 
     expect(counter.getState().value).toBe(1);
   });
+
+  it('snaps direct input to the nearest step from min when snapToStep is enabled', () => {
+    const counter = createCounterState({
+      min: 1,
+      max: 10,
+      step: 2,
+      snapToStep: true,
+    });
+
+    counter.setValue(4.2);
+    expect(counter.getState().value).toBe(5);
+
+    counter.setValue(8.6);
+    expect(counter.getState().value).toBe(9);
+  });
+
+  it('supports decimal snapping when snapToStep is enabled', () => {
+    const counter = createCounterState({
+      min: 0.5,
+      max: 2,
+      step: 0.25,
+      snapToStep: true,
+    });
+
+    counter.setValue(1.37);
+
+    expect(counter.getState().value).toBe(1.25);
+  });
 });

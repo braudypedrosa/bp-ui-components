@@ -58,6 +58,7 @@ export class BPUIRadioGroup {
       return this.root[INSTANCE_KEY];
     }
 
+    this.root.classList.add('bp-widget-reset');
     this.elements = {
       group: this.root.querySelector('.bp-ui-radio__group'),
       label: this.root.querySelector('.bp-ui-radio__label'),

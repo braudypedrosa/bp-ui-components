@@ -157,4 +157,13 @@ describe('BPUIRadioGroup', () => {
 
     expect(group.getValue()).toBe('push');
   });
+
+  it('adds the shared widget reset class to the root', () => {
+    document.body.innerHTML = createRadioMarkup();
+    const root = document.querySelector('.bp-ui-radio');
+
+    new BPUIRadioGroup(root);
+
+    expect(root.classList.contains('bp-widget-reset')).toBe(true);
+  });
 });
