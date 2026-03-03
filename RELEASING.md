@@ -5,6 +5,7 @@
 This repository releases from the `main` branch using `scripts/release.sh`.
 
 The script handles the version bump, release commit, git tag, push, and npm publish for `@braudypedrosa/bp-ui-components`.
+If the next requested version has already been used on npm, the script advances until it finds the next publishable version.
 
 ## Versioning
 
@@ -24,19 +25,14 @@ Before releasing:
 - make sure you are on `main`
 - make sure the working tree is clean
 - make sure npm auth is valid with `npm whoami`
-- make sure checks are passing:
-  - `npm test`
-  - `npm run build`
+- make sure any repo-specific checks you use have passed
 
 ## Pre-release Checklist
 
 1. Commit the product changes you want in the release.
 2. Confirm the release branch is `main`.
 3. Confirm there are no uncommitted changes.
-4. Run:
-   - `npm test`
-   - `npm run build`
-5. Confirm npm auth:
+4. Confirm npm auth:
    - `npm whoami`
 
 ## Standard Release Commands
@@ -54,6 +50,7 @@ What each command does:
 - `patch`: bumps the last digit
 - `minor`: bumps the middle digit
 - `major`: bumps the first digit
+- if the first candidate has already been used on npm, the script keeps moving forward on the same release axis until it finds an unused version
 
 ## Exact Version Releases
 
@@ -66,7 +63,9 @@ npm run release -- 1.2.3
 This is useful when:
 
 - you need to align a release with a predetermined version
-- you need to rerun a release flow with an explicit semver target
+- you need to release a specific unpublished semver target
+
+If the exact version has already been used on npm, the script starts from the next patch after the current local version and keeps moving forward until it finds an unused version.
 
 ## What the Release Script Does
 
@@ -77,22 +76,22 @@ This is useful when:
 3. Verifies the working tree is clean.
 4. Fetches `origin/main` and tags.
 5. Rebases local `main` onto `origin/main`.
-6. Runs `npm version` with the requested bump.
-7. Creates the release commit:
+6. Resolves the next publishable version from npm history.
+7. Runs `npm version` for that resolved version.
+8. Updates the README version line when present.
+9. Creates the release commit:
    - `chore(release): x.y.z`
-8. Creates the git tag:
+10. Creates the git tag:
    - `vx.y.z`
-9. Pushes `main` and tags to `origin`.
-10. Publishes the package to npm.
+11. Pushes `main` and tags to `origin`.
+12. Publishes the package to npm.
 
 ## Recommended Flow
 
 Use this release sequence:
 
 1. Commit the product work.
-2. Run:
-   - `npm test`
-   - `npm run build`
+2. Run any checks you need for the current change.
 3. Run the release command:
    - `npm run release -- patch`
    - or `minor`
@@ -125,6 +124,8 @@ Common issues:
   - fix: commit or stash changes before releasing
 - wrong branch
   - fix: switch to `main`
+- requested version was already used on npm
+  - fix: rerun the release command; the script will skip ahead to the next publishable version
 - npm auth failure
   - fix: run `npm whoami` and refresh login/token before releasing
 - publish succeeds but verification lags
